@@ -1,0 +1,44 @@
+SELECT DISTINCT company,
+    TRIM (company)
+FROM layoffs_staging2;
+
+UPDATE layoffs_staging2
+SET company= TRIM(company);
+
+SELECT DISTINCT industry
+FROM layoffs_staging2
+ORDER BY industry;
+
+-- WE CAN SEE THAT CRYPTO HAD 3 DIFFERENT VARIATIONS SO THAT NEEDS TO BE CHANGED
+
+UPDATE layoffs_staging2
+SET industry = 'Crypto'
+WHERE industry LIKE 'Crypto%';
+
+SELECT DISTINCT country
+FROM layoffs_staging2
+ORDER BY country;
+
+-- WE CAN SEE THAT SOME OF THE ROWS WITH UNITED STATES HAVE A DOT AT THE END SO THAT NEEDS TO BE CHANGED
+
+UPDATE layoffs_staging2
+SET industry = 'UNITED STATES'
+WHERE industry LIKE 'UNITED STATES%';
+
+-- IN THIS DATASET THE DATE COLUMN IS IN TEXT FUNCTION AND THE FORMAT NEEDS TO BE CHANGED AS WELL.
+
+-- CHANGE THE DATE FORMAT
+
+SELECT TO_DATE(date, 'MM/DD/YYYY')
+FROM layoffs_staging2;
+
+UPDATE layoffs_staging2
+SET date = TO_DATE(date, 'MM/DD/YYYY')
+WHERE date IS NOT NULL 
+  AND date != 'NULL';
+
+--CHANGE THE COLUMN TYPE TO DATE
+
+ALTER TABLE layoffs_staging2
+ALTER COLUMN date TYPE DATE
+USING TO_DATE(date, 'MM/DD/YYYY');
