@@ -14,7 +14,7 @@ FROM layoffs_staging2 tb1
 JOIN layoffs_staging2 tb2
     ON tb1.company= tb2.company
     AND tb1.location= tb2.location
-WHERE industry IS NULL AND industry IS NOT NULL;
+WHERE tb1.industry IS NULL AND tb2.industry IS NOT NULL;
 
 
 UPDATE layoffs_staging2 tb1
@@ -22,3 +22,4 @@ JOIN layoffs_staging2 tb2
     ON tb1.company= tb2.company
 SET tb1.industry= tb2.industry
 WHERE tb1.industry IS NULL AND tb2.industry IS NOT NULL;
+

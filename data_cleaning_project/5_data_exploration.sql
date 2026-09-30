@@ -22,7 +22,9 @@ ALTER TABLE layoffs_staging2
 ALTER COLUMN funds_raised_millions TYPE NUMERIC 
 USING funds_raised_millions::NUMERIC;
 
-SELECT * 
+SELECT company,
+    percentage_laid_off,
+    funds_raised_millions
 FROM layoffs_staging2
 WHERE percentage_laid_off = '1'
     AND funds_raised_millions IS NOT NULL
@@ -60,7 +62,7 @@ SELECT
 FROM layoffs_staging2
 WHERE date IS NOT NULL  
 GROUP BY month
-ORDER BY month;
+ORDER BY total_off DESC;
 
 -- NOW WE ARE GOING TO ADD EACH MONTH ON TOP OF THE NEXT FOR THE WHOLE PERIOD.
 

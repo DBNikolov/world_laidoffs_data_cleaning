@@ -46,6 +46,3 @@ FROM layoffs_staging;
 DELETE 
 FROM layoffs_staging2
 WHERE row_num > 1;
-
-ALTER TABLE layoffs_staging2
-DROP COLUMN row_num;
